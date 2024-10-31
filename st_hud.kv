@@ -1,0 +1,67 @@
+<STHUDLayout>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: dp(10)
+        spacing: dp(10)
+
+        Button:
+            id: bluetooth_button
+            text: "Connect via Bluetooth"
+            size_hint_y: None
+            height: dp(40)
+            # Remove or comment out the on_press action
+            # on_press: root.bluetooth_status = "Connecting..."
+
+        Label:
+            id: bluetooth_status_label
+            text: root.bluetooth_status
+            size_hint_y: None
+            height: dp(20)
+            font_size: '18sp'
+
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint_y: None
+            height: dp(40)
+
+            TextInput:
+                id: address_input
+                text: root.address
+                multiline: False
+                size_hint_x: 0.8
+                on_text_validate: root.on_address_entered(self.text)
+
+            Button:
+                text: "Enter"
+                size_hint_x: 0.2
+                on_press: root.on_address_entered(address_input.text)
+
+        Image:
+            id: map_image
+            source: root.map_image_path
+            allow_stretch: True
+            keep_ratio: True
+            size_hint_y: None
+            height: dp(200)
+
+        Label:
+            id: route_info_label
+            text: root.route_info
+            font_size: '18sp'
+            size_hint_y: None
+            height: dp(20)
+
+        Label:
+            id: navigation_instruction_label
+            text: root.navigation_instruction
+            font_size: '16sp'
+            size_hint_y: None
+            height: dp(40)
+
+        Label:
+            text: root.eta_info
+            pos_hint: {"x": 0.1, "y": 0.7}
+            size_hint: 0.8, 0.1
+            font_size: 16
+            color: 1, 1, 1, 1  # White color
+
