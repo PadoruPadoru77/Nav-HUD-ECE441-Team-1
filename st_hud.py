@@ -21,7 +21,7 @@ Config.set('graphics', 'height', '380')
 Builder.load_file("st_hud.kv")
 
 # Load the saved map graph
-G = ox.load_graphml("chicago_drive.graphml")
+G = ox.load_graphml("chicago_drive_UPDATED.graphml")
 
 
 class STHUDLayout(FloatLayout):
