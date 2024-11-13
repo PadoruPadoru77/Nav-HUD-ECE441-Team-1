@@ -84,7 +84,7 @@ class STHUDLayout(FloatLayout):
 
         avg_speed_mps = avg_speed_kmh * 1000 / 3600
         travel_time_seconds = route_length / avg_speed_mps
-        return timedelta(seconds=travel_time_seconds)
+        return timedelta(seconds=round(travel_time_seconds, 0))
 
    #End Edits
 
