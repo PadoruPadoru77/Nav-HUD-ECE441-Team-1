@@ -1,0 +1,125 @@
+<STHUDLayout>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: dp(10)
+        spacing: dp(10)
+
+        # Address Entry Section
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint_y: None
+            height: dp(40)
+
+            TextInput:
+                id: address_input
+                text: root.address
+                multiline: False
+                size_hint_x: 0.8
+                on_text_validate: root.on_address_entered(self.text)
+
+            Button:
+                text: "Enter"
+                size_hint_x: 0.2
+                on_press: root.on_address_entered(address_input.text)
+
+        # Horizontal BoxLayout to put map and instructions side by side
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint_y: None
+            height: dp(200)
+
+            # Image to display the map (increased size)
+            Image:
+                id: map_image
+                source: root.map_image_path
+                allow_stretch: True
+                keep_ratio: True
+                size_hint_y: 0.8  # Increased size_hint to occupy more vertical space
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}  # Center of the parent
+
+            # Verticle BoxLayout for instructions
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_y: None
+                height: dp(200)
+                spacing: dp(5)
+
+                # Route Information
+                Label:
+                    id: route_info_label
+                    text: root.route_info
+                    font_size: '18sp'
+                    pos_hint: {"center_x": 0.5, "center_y": 0.5}  # Center of the parent
+
+                # Navigation Instructions
+                Label:
+                    id: navigation_instruction_label
+                    text: root.navigation_instruction
+                    font_size: '16sp'
+                    pos_hint: {"center_x": 0.5, "center_y": 0.5}  # Center of the parent
+
+                # ETA Information
+                Label:
+                    text: root.eta_info
+                    size_hint_y: None
+                    font_size: '16sp'
+                    color: 1, 1, 1, 1  # White color
+                    pos_hint: {"center_x": 0.5, "center_y": 0.5}  # Center of the parent
+
+                # Horizontal Layout for media
+                BoxLayout:
+                    orientation: 'horizontal'
+                    size_hint_y: None
+                    height: dp(70)
+                    spacing: dp(5)
+
+                    # Image to display Media
+                    Image:
+                        id: media_image
+                        source: root.media_image
+                        allow_stretch: True
+                        keep_ratio: True
+                        pos_hint: {"x": 0, "y": 0}  # Bottom-Left of the parent
+
+                    # Vertical Layout for media
+                    BoxLayout:
+                        orientation: 'vertical'
+                        size_hint_y: None
+                        height: dp(70)
+                        spacing: dp(5)
+
+                        # Title Label
+                        Label:
+                            id: title_label
+                            text: root.title
+                            font_size: '16sp'
+                            halign: 'left'
+                            valign: 'middle'
+                            size_hint_y: None
+                            height: dp(20)
+                            text_size: self.width, None
+                            shorten: True
+
+                        # Artist label
+                        Label:
+                            id: artist_label
+                            text: root.artist
+                            font_size: '16sp'
+                            halign: 'left'
+                            valign: 'middle'
+                            size_hint_y: None
+                            height: dp(20)
+                            text_size: self.width, None
+                            shorten: True
+
+                        # Album Label
+                        Label:
+                            id: album_label
+                            text: root.album
+                            font_size: '16sp'
+                            halign: 'left'
+                            valign: 'middle'
+                            size_hint_y: None
+                            height: dp(20)
+                            text_size: self.width, None
+                            shorten: True
