@@ -256,7 +256,7 @@ class STHUDLayout(FloatLayout):
         # Update ETA based on remaining distance
         remaining_distance = self.total_route_length - self.current_distance
         eta_seconds = remaining_distance / self.speed_mps
-        eta = timedelta(seconds=eta_seconds)
+        eta = timedelta(seconds=round(eta_seconds, 0))
 
         # Determine if within proximity threshold
         proximity_threshold = 500  # meters

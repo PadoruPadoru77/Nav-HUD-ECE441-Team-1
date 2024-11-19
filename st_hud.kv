@@ -26,7 +26,7 @@
         BoxLayout:
             orientation: 'horizontal'
             size_hint_y: None
-            height: dp(200)
+            height: dp(300)
 
             # Image to display the map (increased size)
             Image:
@@ -41,8 +41,8 @@
             BoxLayout:
                 orientation: 'vertical'
                 size_hint_y: None
-                height: dp(200)
-                spacing: dp(5)
+                height: dp(150)
+                spacing: dp(20)
 
                 # Route Information
                 Label:
@@ -56,10 +56,11 @@
                     id: navigation_instruction_label
                     text: root.navigation_instruction
                     font_size: '16sp'
-                    pos_hint: {"center_x": 0.5, "center_y": 0.5}  # Center of the parent
+                    pos_hint: {"center_x": 0.5, "center_y": 1}  # Center of the parent
 
                 # ETA Information
                 Label:
+                    id: ETA_label
                     text: root.eta_info
                     size_hint_y: None
                     font_size: '16sp'
