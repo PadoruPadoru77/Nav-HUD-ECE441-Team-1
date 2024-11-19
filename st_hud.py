@@ -311,6 +311,12 @@ class STHUDLayout(FloatLayout):
         """
         Plot the route and the current simulated position on the map.
         """
+        lats = [self.G.nodes[node]['y'] for node in self.route_nodes] + [current_position[0]]
+        lons = [self.G.nodes[node]['x'] for node in self.route_nodes] + [current_position[1]]
+        north, south = max(lats), min(lats)
+        east, west = max(lons), min(lons)
+        margin = 0.01  # Add margin for better visibility
+
         # Plot the route
         fig, ax = ox.plot_graph_route(
             self.G,
@@ -322,7 +328,7 @@ class STHUDLayout(FloatLayout):
             edge_color='gray',
             route_color='red',
             route_linewidth=3,
-            bbox=None  # Let OSMNX decide the bounding box
+            bbox=(north + margin, south - margin, east + margin, west - margin)
         )
 
         # Plot the current position as a blue dot
