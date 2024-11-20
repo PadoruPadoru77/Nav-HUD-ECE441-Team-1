@@ -311,13 +311,12 @@ class STHUDLayout(FloatLayout):
         """
         Plot the route and the current simulated position on the map.
         """
-        lats = [self.G.nodes[node]['y'] for node in self.route_nodes] + [current_position[0]]
-        lons = [self.G.nodes[node]['x'] for node in self.route_nodes] + [current_position[1]]
-        north, south = max(lats), min(lats)
-        east, west = max(lons), min(lons)
-        margin = 0.01  # Add margin for better visibility
+        # Define a fixed area around the current position
+        margin = 0.001  # Margin in degrees (~100m for lat/lon) - change this to zoom in or out
+        north, south = current_position[0] + margin, current_position[0] - margin
+        east, west = current_position[1] + margin, current_position[1] - margin
 
-        # Plot the route
+        # Plot the route with a fixed bounding box
         fig, ax = ox.plot_graph_route(
             self.G,
             self.route_nodes,
@@ -328,15 +327,15 @@ class STHUDLayout(FloatLayout):
             edge_color='gray',
             route_color='red',
             route_linewidth=3,
-            bbox=(north + margin, south - margin, east + margin, west - margin)
+            bbox=(north, south, east, west)  # Use fixed bounding box centered on the current position
         )
 
         # Plot the current position as a blue dot
-        ax.plot(current_position[1], current_position[0], marker='o', markersize=10, markeredgecolor='blue', markerfacecolor='blue')
+        ax.plot(current_position[1], current_position[0], marker='o', markersize=10, 
+                markeredgecolor='blue', markerfacecolor='blue')
 
         # Save the map image to a fixed file to prevent accumulation
         image_path = "route_map_simulation.png"
-        # Overwrite the existing simulation map
         fig.savefig(image_path, dpi=100, bbox_inches='tight')
         plt.close(fig)
 
